@@ -1,11 +1,5 @@
 = Vestal Versions
 
-{<img src="https://badge.fury.io/rb/vestal_versions.png" alt="Gem Version" />}[http://badge.fury.io/rb/vestal_versions]
-{<img src="https://travis-ci.org/laserlemon/vestal_versions.png?branch=master" alt="Build Status" />}[https://travis-ci.org/laserlemon/vestal_versions]
-{<img src="https://codeclimate.com/github/laserlemon/vestal_versions.png" alt="Code Climate" />}[https://codeclimate.com/github/laserlemon/vestal_versions]
-{<img src="https://coveralls.io/repos/laserlemon/vestal_versions/badge.png" alt="Coverage Status" />}[https://coveralls.io/r/laserlemon/vestal_versions]
-{<img src="https://gemnasium.com/laserlemon/vestal_versions.png" alt="Dependency Status" />}[https://gemnasium.com/laserlemon/vestal_versions]
-
 Finally, DRY ActiveRecord versioning!
 
 <tt>acts_as_versioned</tt>[http://github.com/technoweenie/acts_as_versioned] by technoweenie[http://github.com/technoweenie] was a great start, but it failed to keep up with ActiveRecord's introduction of dirty objects in version 2.1. Additionally, each versioned model needs its own versions table that duplicates most of the original table's columns. The versions table is then populated with records that often duplicate most of the original record's attributes. All in all, not very DRY.
@@ -13,6 +7,10 @@ Finally, DRY ActiveRecord versioning!
 <tt>vestal_versions</tt>[http://github.com/laserlemon/vestal_versions] requires only one versions table (polymorphically associated with its parent models) and no changes whatsoever to existing tables. But it goes one step DRYer by storing a serialized hash of _only_ the models' changes. Think modern version control systems. By traversing the record of changes, the models can be reverted to any point in time.
 
 And that's just what <tt>vestal_versions</tt> does. Not only can a model be reverted to a previous version number but also to a date or time!
+
+== Changes in this fork
+
+This fork adds the ability to find versions where a specific attribute changed, useful for determining the previous value of a tracked attribute.
 
 == Compatibility
 
@@ -25,7 +23,7 @@ In the Gemfile:
 ** Note: I am giving this project some much needed love to keep her relevant in a post Rails 3 world. I will be finalizing a version to support 1.9.2+ and Rails 3.2+ soon and pushing the gem, till then, use the git repo:
 ~dreamr
   
-  gem 'vestal_versions', :git => 'git://github.com/laserlemon/vestal_versions'
+  gem 'vestal_versions', :git => 'git://github.com/neilgupta/vestal_versions'
   
 
 Next, generate and run the first and last versioning migration you'll ever need:

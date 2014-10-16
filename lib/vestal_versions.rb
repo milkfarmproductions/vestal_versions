@@ -47,6 +47,8 @@ module VestalVersions
   autoload :VersionTagging
   autoload :Versioned
   autoload :Versions
+  autoload :UserVersionMethods
+  autoload :TaggingVersionMethods
 
   class << self
     delegate :config, :configure, :to => Version

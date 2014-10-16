@@ -6,8 +6,6 @@ module VestalVersions
   class Version < ActiveRecord::Base
     include Comparable
     include ActiveSupport::Configurable
-    include UserVersionMethods
-    include TaggingVersionMethods
 
     # Associate polymorphically with the parent record.
     belongs_to :versioned, :polymorphic => true

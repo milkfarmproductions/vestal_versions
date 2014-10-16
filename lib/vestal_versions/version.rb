@@ -7,13 +7,15 @@ module VestalVersions
     include Comparable
     include ActiveSupport::Configurable
 
-    self.table_name = "vestal_versions"
-
     # Associate polymorphically with the parent record.
     belongs_to :versioned, :polymorphic => true
 
     if ActiveRecord::VERSION::MAJOR == 3
       attr_accessible :modifications, :number, :user, :tag, :reverted_from
+    end
+
+    def self.table_name
+      "vestal_versions"
     end
 
     # ActiveRecord::Base#changes is an existing method, so before serializing the +changes+ column,

@@ -21,12 +21,8 @@ Tested with Active Record 4.1.1 with Ruby 2.1.1
 == Installation
 
 In the Gemfile:
-
-** Note: I am giving this project some much needed love to keep her relevant in a post Rails 3 world. I will be finalizing a version to support 1.9.2+ and Rails 3.2+ soon and pushing the gem, till then, use the git repo:
-~dreamr
   
   gem 'vestal_versions', :git => 'git://github.com/neilgupta/vestal_versions'
-  
 
 Next, generate and run the first and last versioning migration you'll ever need:
 
@@ -196,13 +192,3 @@ There are a handful of exciting new additions in version 1.0 of <tt>vestal_versi
     => <User id: 2, first_name => "Steven", last_name: "Jobs", ... >
     >> @user.version
     => 2
-
-== Thanks!
-
-Thank you to all those who post {issues and suggestions}[http://github.com/laserlemon/vestal_versions/issues]. And special thanks to:
-
-* splattael[http://github.com/splattael], who first bugged (and helped) me to write some tests for this thing
-* snaury[http://github.com/snaury], who helped out early on with the <tt>between</tt> association method, the <tt>:dependent</tt> option and a conflict from using a method called <tt>changes</tt>
-* sthapit[http://github.com/sthapit], who was responsible for the <tt>:only</tt> and <tt>:except</tt> options as well as showing me that I'm a dummy for storing a useless first version
-
-To contribute to <tt>vestal_versions</tt>, please fork, hack away in the integration[http://github.com/laserlemon/vestal_versions/tree/integration] branch and send me a pull request. Remember your tests!

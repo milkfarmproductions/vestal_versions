@@ -10,7 +10,7 @@ module VestalVersions
     # Associate polymorphically with the parent record.
     belongs_to :versioned, :polymorphic => true
 
-    if ActiveRecord::VERSION::MAJOR == 3
+    if ActiveRecord::VERSION::MAJOR < 4 || defined?(ProtectedAttributes)
       attr_accessible :modifications, :number, :user, :tag, :reverted_from
     end
 

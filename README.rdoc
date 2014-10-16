@@ -10,11 +10,13 @@ And that's just what <tt>vestal_versions</tt> does. Not only can a model be reve
 
 == Changes in this fork
 
-This fork adds the ability to find versions where a specific attribute changed, useful for determining the previous value of a tracked attribute.
+This fork adds the ability to find versions where a specific attribute changed, useful for determining the previous value of a tracked attribute. The 2 new methods are <tt>versions.find_with_attribute(attr)</tt> and <tt>versions.find_last_with_attribute(attr)</tt>. (See example below for usage.)
+
+It also namespaces the versions table to "vestal_versions" and includes compatability for Rails 4+ with ProtectedAttributes gem.
 
 == Compatibility
 
-Tested with Active Record 3.2.16 with Ruby 1.9.3 and 1.9.2.
+Tested with Active Record 4.1.1 with Ruby 2.1.1
 
 == Installation
 
@@ -73,6 +75,8 @@ It's that easy! Now watch it in action...
   => "Steve Jobs"
   >> u.version
   => 4
+  >> u.versions.find_with_attribute(:last_name)
+  => [#<VestalVersions::Version id: 3, versioned_id: 4, versioned_type: "User", user_id: nil, user_type: nil, user_name: nil, modifications: {"last_name"=>["Richert", "Jobs"]}, number: 4, reverted_from: nil, tag: nil, created_at: "2014-10-16 02:55:40", updated_at: "2014-10-16 02:55:40">]
   >> u.revert_to!(2)
   => true
   >> u.name

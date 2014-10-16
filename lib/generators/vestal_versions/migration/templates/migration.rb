@@ -1,6 +1,6 @@
 class CreateVestalVersions < ActiveRecord::Migration
   def self.up
-    create_table :versions do |t|
+    create_table :vestal_versions do |t|
       t.belongs_to :versioned, :polymorphic => true
       t.belongs_to :user, :polymorphic => true
       t.string  :user_name
@@ -12,7 +12,7 @@ class CreateVestalVersions < ActiveRecord::Migration
       t.timestamps
     end
 
-    change_table :versions do |t|
+    change_table :vestal_versions do |t|
       t.index [:versioned_id, :versioned_type]
       t.index [:user_id, :user_type]
       t.index :user_name
@@ -23,6 +23,6 @@ class CreateVestalVersions < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table :versions
+    drop_table :vestal_versions
   end
 end

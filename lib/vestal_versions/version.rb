@@ -7,7 +7,7 @@ module VestalVersions
     include Comparable
     include ActiveSupport::Configurable
 
-    self.table_name = "vestal_versions"
+    set_table_name "vestal_versions"
 
     # Associate polymorphically with the parent record.
     belongs_to :versioned, :polymorphic => true

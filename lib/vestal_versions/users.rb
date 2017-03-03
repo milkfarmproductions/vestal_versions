@@ -11,8 +11,7 @@ module VestalVersions
 
     # Methods added to versioned ActiveRecord::Base instances to enable versioning with additional
     # user information.
-    
-    
+
     private
     # Overrides the +version_attributes+ method to include user information passed into the
     # parent object, by way of a +updated_by+ attr_accessor.
@@ -29,21 +28,24 @@ module VestalVersions
       belongs_to :user, :polymorphic => true
 
       alias_method :user_without_name, :user
+      alias_method :user, :user_with_name
+
       alias_method :user_without_name=, :user=
+      alias_method :user=, :user_with_name=
     end
 
     # Overrides the +user+ method created by the polymorphic +belongs_to+ user association. If
     # the association is absent, defaults to the +user_name+ string column. This allows
     # VestalVersions::Version#user to either return an ActiveRecord::Base object or a string,
-    # depending on what is sent to the +user=+ method.
-    def user
+    # depending on what is sent to the +user_with_name=+ method.
+    def user_with_name
       user_without_name || user_name
     end
 
     # Overrides the +user=+ method created by the polymorphic +belongs_to+ user association.
     # Based on the class of the object given, either the +user+ association columns or the
     # +user_name+ string column is populated.
-    def user=(value)
+    def user_with_name=(value)
       case value
         when ActiveRecord::Base then self.user_without_name = value
         else self.user_name = value

@@ -2,7 +2,7 @@ branches:
   only:
     - master
 gemfile:
-  - gemfiles/activerecord_4_2.gemfile
+  - Gemfile
 language: ruby
 matrix:
   allow_failures:

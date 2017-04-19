@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |gem|
   gem.name    = 'vestal_versions'
-  gem.version = '2.0.2'
+  gem.version = '2.1.0'
 
   gem.authors     = ['Steve Richert', "James O'Kelly", 'C. Jason Harrelson', 'Scott Willson']
   gem.email       = ['steve.richert@gmail.com', 'dreamr.okelly@gmail.com', 'jason@lookforwardenterprises.com', 'scott.willson@gmail.com']

@@ -1,3 +1,4 @@
+{<img src="https://travis-ci.org/duckworth/vestal_versions.svg?branch=master" alt="Build Status" />}[https://travis-ci.org/duckworth/vestal_versions]
 = Vestal Versions
 
 Finally, DRY ActiveRecord versioning!

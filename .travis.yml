@@ -2,10 +2,9 @@ branches:
   only:
     - master
 gemfile:
-  - gemfiles/activerecord_3_0.gemfile
-  - gemfiles/activerecord_3_1.gemfile
-  - gemfiles/activerecord_3_2.gemfile
   - gemfiles/activerecord_4_0.gemfile
+  - gemfiles/activerecord_5_0.gemfile
+  - gemfiles/activerecord_5_1.gemfile
 language: ruby
 matrix:
   allow_failures:
@@ -13,10 +12,9 @@ matrix:
   include:
     - env: COVERAGE=1
       gemfile: Gemfile
-      rvm: 2.1.0
+      rvm: 2.3.6
 rvm:
-  - 1.9.3
-  - 2.0.0
-  - 2.1.0
+  - 2.2.2
+  - 2.4.1
   - ruby-head
 script: bundle exec rspec

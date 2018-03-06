@@ -2,7 +2,7 @@ if ENV['COVERAGE']
   require 'coveralls'
   Coveralls.wear!
 end
-
+require 'rspec/its'
 require 'vestal_versions'
 
 require 'bundler'

@@ -14,9 +14,6 @@ matrix:
     - env: COVERAGE=1
       gemfile: Gemfile
       rvm: 2.3.6
-  exclude:
-    - rvm: 2.4.1
-      jdk: openjdk6
 rvm:
   - 2.2.2
   - 2.3.6

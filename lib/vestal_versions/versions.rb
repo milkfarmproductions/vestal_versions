@@ -31,7 +31,7 @@ module VestalVersions
       return [] if from_number.nil? || to_number.nil?
 
       condition = (from_number == to_number) ? to_number : Range.new(*[from_number, to_number].sort)
-      where(:number => condition).order("#{table_name}.#{connection.quote_column_name('number')} #{(from_number > to_number) ? 'DESC' : 'ASC'}").to_a
+      where(:number => condition).order(Arel.sql("#{table_name}.#{connection.quote_column_name('number')} #{(from_number > to_number) ? 'DESC' : 'ASC'}")).to_a
     end
 
     # Returns all version records created before the version associated with the given value.

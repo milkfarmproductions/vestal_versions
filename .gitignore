@@ -20,3 +20,4 @@ _yardoc
 .rspec
 .ruby-gemset
 .ruby-version
+bin/

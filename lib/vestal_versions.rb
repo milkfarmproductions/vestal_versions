@@ -71,7 +71,7 @@ module VestalVersions
     #   will permanently remove all associated versions *without* triggering any destroy callbacks.
     #   Other options are :destroy which removes the associated versions *with* callbacks, or
     #   :nullify which leaves the version records in the database, but dissociates them from the
-    #   parent object by setting the foreign key columns to +nil+ values.  Setting this option to 
+    #   parent object by setting the foreign key columns to +nil+ values.  Setting this option to
     #   :tracking will perform a soft delete on destroy and create a new version record preserving
     #   details of this record for later restoration.
     # * <tt>:except</tt>: An update will trigger version creation as long as at least one column
@@ -120,7 +120,7 @@ module VestalVersions
       include Deletion
 
       prepare_versioned_options(options)
-      has_many :versions, options, &block
+      has_many :versions, lambda { order(Arel.sql("#{table_name}.#{connection.quote_column_name('number')}")) }, options, &block
     end
   end
 end

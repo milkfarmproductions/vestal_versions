@@ -30,17 +30,19 @@ describe VestalVersions::Versions do
     @last_version.should_not == last_version
   end
 
-  it 'defaults to ordering by number when finding through association' do
-    numbers = user.versions.map(&:number)
-    numbers.sort.should == numbers
+  it "defaults to ordering by number when finding through association" do
+    expect_query /SELECT.*versions.*FROM.*versions.*WHERE.*versions.*versioned_id.*=.*AND.*versions.*versioned_type.*ORDER BY.*number/ do
+      numbers = user.versions.map(&:number)
+      numbers.sort.should == numbers
+    end
   end
 
-  it 'returns true for the "initial?" method when the version number is 1' do
+  it "returns true for the 'initial?' method when the version number is 1" do
     version = user.versions.build(:number => 1)
     version.number.should == 1
     version.should be_initial
   end
-  
+
   it "sreturn the version number if it is not a revert" do
     user.version.should == user.versions.last.original_number
   end
@@ -57,5 +59,24 @@ describe VestalVersions::Versions do
     user.revert_to!(version)
     user.versions.last.original_number.should == 2
   end
-  
+
+  def count_queries(&block)
+    count = 0
+    counter_f = ->(_name, _started, _finished, _unique_id, payload) {
+      unless %w[CACHE SCHEMA].include?(payload[:name])
+        count += 1
+      end
+    }
+    ActiveSupport::Notifications.subscribed(counter_f, "sql.active_record", &block)
+    count
+  end
+
+  def expect_query(match, &block)
+    count = 0
+    counter_f = ->(_name, _started, _finished, _unique_id, payload) {
+      count +=1 if match === payload[:sql]
+    }
+    ActiveSupport::Notifications.subscribed(counter_f, "sql.active_record", &block)
+    expect(count).to eq(1)
+  end
 end

@@ -55,7 +55,7 @@ module VestalVersions
     #   user = User.find_by_first_name("Steve")
     #   user.version # => 1
     #   user.merge_version do
-    #     user.update_attributes(:first_name => "Steven", :last_name => "Tyler")
+    #     user.update(:first_name => "Steven", :last_name => "Tyler")
     #     user.update_attribute(:first_name, "Stephen")
     #     user.update_attribute(:last_name, "Richert")
     #   end

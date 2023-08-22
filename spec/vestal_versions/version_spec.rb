@@ -55,7 +55,7 @@ describe VestalVersions::Versions do
   it "return the original version if it is a double revert" do
     user.revert_to!(2)
     version = user.version
-    user.update_attributes(:last_name => 'Gates')
+    user.update(:last_name => 'Gates')
     user.revert_to!(version)
     user.versions.last.original_number.should == 2
   end

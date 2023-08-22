@@ -7,6 +7,7 @@ describe VestalVersions::Deletion do
   context "a deleted version's changes" do
 
     before do
+      ActiveRecord.yaml_column_permitted_classes = [Symbol, Time] if ActiveRecord::VERSION::MAJOR > 6
       subject.update_attribute(:last_name, 'Jobs')
     end
 
@@ -30,6 +31,7 @@ describe VestalVersions::Deletion do
   context "deleted versions" do
     let(:last_version){ VestalVersions::Version.last }
     before do
+      ActiveRecord.yaml_column_permitted_classes = [Symbol, Time] if ActiveRecord::VERSION::MAJOR > 6
       subject.update_attribute(:last_name, 'Jobs')
       subject.destroy
     end
@@ -60,7 +62,7 @@ describe VestalVersions::Deletion do
 
       it "restores even if the schema has changed" do
         new_mods = last_version.modifications.merge(:old_column => 'old')
-        last_version.update_attributes(:modifications => new_mods)
+        last_version.update(:modifications => new_mods)
 
         last_version.restore.should == subject
       end

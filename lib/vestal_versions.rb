@@ -120,7 +120,7 @@ module VestalVersions
       include Deletion
 
       prepare_versioned_options(options)
-      has_many :versions, lambda { order(Arel.sql("#{table_name}.#{connection.quote_column_name('number')}")) }, options, &block
+      has_many :versions, lambda { order(Arel.sql("#{table_name}.#{connection.quote_column_name('number')}")) }, **options, &block
     end
   end
 end

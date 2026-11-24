@@ -1,13 +1,18 @@
 require 'active_record'
-require 'active_support/configurable'
 
 module VestalVersions
   # The ActiveRecord model representing versions.
   class Version < ActiveRecord::Base
     include Comparable
-    include ActiveSupport::Configurable
     include VersionUsers
     include VersionVersionTagging
+
+    # Address ActiveSupport::Configurable deprecation
+    class_attribute :config, instance_predicate: false, default: ActiveSupport::OrderedOptions.new
+
+    def self.configure
+      yield config
+    end
 
     # Associate polymorphically with the parent record.
     belongs_to :versioned, :polymorphic => true
@@ -38,7 +43,7 @@ module VestalVersions
     def initial?
       number == 1
     end
-    
+
     # Returns the original version number that this version was.
     def original_number
       if reverted_from.nil?
@@ -51,15 +56,15 @@ module VestalVersions
 
     def restore!
       model = restore
-      
+
       if model
         model.save!
         destroy
       end
-      
+
       model
     end
-    
+
     def restore
       if tag == 'deleted'
         attrs = modifications
